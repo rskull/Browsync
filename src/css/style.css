@@ -1,0 +1,30 @@
+
+#main {
+    width: 300px;
+    margin: auto
+}
+
+#drop {
+    border: 3px solid #555;
+    background: #ccc;
+    height: 150px;
+    margin-top: 5px
+}
+
+#list {
+    border: dashed #aaa;
+    border-width: 1px 0px;
+    margin-top: 10px;
+    padding: 5px;
+    height: 150px;
+    overflow: auto;
+    cursor: default
+}
+
+li:hover {
+    color: #f00
+}
+
+p {
+    text-align: center
+}
