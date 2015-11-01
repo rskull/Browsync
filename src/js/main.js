@@ -1,14 +1,14 @@
 (function () {
  
-    var al = window.open('', 'autoloader', 'width=350, height=450px, location=no');
+    var bs = window.open('', 'browsync', 'width=350, height=450px, location=no');
  
-    if (al.autoload) {
+    if (bs.browsync) {
 
-        al.foucus();
+        bs.foucus();
 
     } else {
 
-        var d = al.document,
+        var d = bs.document,
             content = d.createElement('div'),
             script = d.createElement('script');
  
