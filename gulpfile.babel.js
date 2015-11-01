@@ -4,6 +4,7 @@
 
 import fs from 'fs'
 import del from 'del'
+import plumber from 'gulp-plumber'
 import runSequence from 'run-sequence'
 import htmlmin from 'html-minifier'
 import cssmin from 'cssmin'
@@ -12,6 +13,7 @@ import babel from 'gulp-babel'
 import uglify from 'gulp-uglify'
 import replace from 'gulp-replace-task'
 import bookmarkify from 'gulp-bookmarkify'
+import eslint from 'gulp-eslint'
 
 /**
  * Tasks
@@ -19,6 +21,7 @@ import bookmarkify from 'gulp-bookmarkify'
 
 gulp.task('build', function (callback) {
     runSequence(
+        'eslint',
         'build.js01',
         'build.js02',
         'build.html',
@@ -27,8 +30,16 @@ gulp.task('build', function (callback) {
     );
 });
 
+gulp.task('eslint', () => {
+    return gulp.src('./src/js/*.js')
+        .pipe(plumber())
+        .pipe(eslint())
+        .pipe(eslint.format());
+});
+
 gulp.task('build.js01', () => {
     return gulp.src('src/js/browsync.js')
+        .pipe(plumber())
         .pipe(babel())
         .pipe(uglify())
         .pipe(gulp.dest('dist'));
@@ -36,6 +47,7 @@ gulp.task('build.js01', () => {
 
 gulp.task('build.js02', () => {
     return gulp.src('src/js/main.js')
+        .pipe(plumber())
         .pipe(babel())
         .pipe(replace({
             patterns: [
@@ -59,6 +71,7 @@ gulp.task('build.js02', () => {
 
 gulp.task('build.html', () => {
     return gulp.src('src/view/index.html')
+        .pipe(plumber())
         .pipe(replace({
             patterns: [
                 {
